@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AccountController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,4 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+Route::prefix('accounts')->group(function () {
+    Route::get('/', [AccountController::class, 'index']);
+    Route::post('/', [AccountController::class, 'store']);
+    Route::get('/{id}', [AccountController::class, 'show']);
+    Route::put('/{id}', [AccountController::class, 'update']);
+    Route::delete('/{id}', [AccountController::class, 'destroy']);
 });
