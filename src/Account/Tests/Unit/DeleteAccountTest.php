@@ -3,6 +3,7 @@
 namespace Bank\Account\Tests\Unit;
 
 use Bank\Account\Domain\Repositories\AccountRepository;
+use Bank\Account\Domain\Exceptions\AccountNotFoundException;
 use Bank\Account\Domain\Entities\Account;
 
 use Bank\Account\Application\Actions\DeleteAccount;
@@ -50,8 +51,7 @@ class DeleteAccountTest extends TestCase
 
     public function test_ThrowsExceptionIfAccountDoesNotExist(): void
     {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('The account does not exist.');
+        $this->expectException(AccountNotFoundException::class);
 
         $id = 1;
 

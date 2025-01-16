@@ -3,6 +3,7 @@
 namespace Bank\Account\Application\Actions;
 
 use Bank\Account\Domain\Repositories\AccountRepository;
+use Bank\Account\Domain\Exceptions\AccountNotFoundException;
 use Bank\Account\Domain\Entities\Account;
 
 use Bank\Account\Application\DTOs\BankAccountDTO;
@@ -45,7 +46,7 @@ class UpdateAccountName
     {
         $account = $this->accountRepository->findById($id);
         if (!$account) {
-            throw new \Exception("The account does not exist.");
+            throw new AccountNotFoundException();
         }
 
         return $account;

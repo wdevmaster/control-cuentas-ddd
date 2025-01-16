@@ -70,10 +70,10 @@ class PaginatedAccountsDTO
     {
         return [
             'data' => $this->getAccounts(),
-            'current_page' => $this->getPage(),
-            'per_page' => $this->getPageSize(),
+            'currentPage' => $this->getPage(),
+            'perPage' => $this->getPageSize(),
             'total' => $this->getTotalItems(),
-            'last_page' => $this->getTotalPages(),
+            'lastPage' => $this->getTotalPages(),
         ];
     }
 }

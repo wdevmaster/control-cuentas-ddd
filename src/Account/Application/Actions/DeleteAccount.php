@@ -3,7 +3,7 @@
 namespace Bank\Account\Application\Actions;
 
 use Bank\Account\Domain\Repositories\AccountRepository;
-use Bank\Account\Domain\Entities\Account;
+use Bank\Account\Domain\Exceptions\AccountNotFoundException;
 
 class DeleteAccount
 {
@@ -35,7 +35,7 @@ class DeleteAccount
     {
         $account = $this->accountRepository->findById($id);
         if (!$account) {
-            throw new \Exception("The account does not exist.");
+            throw new AccountNotFoundException();
         }
     }
 }

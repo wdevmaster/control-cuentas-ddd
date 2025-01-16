@@ -14,7 +14,7 @@ class Currency
         self::CRC,
     ];
 
-    private function __construct(
+    public function __construct(
         private string $value
     ){}
 
