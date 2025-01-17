@@ -47,8 +47,8 @@ class AccountDTO
     {
         return [
             'id' => $this->id,
-            'accountName' => $this->accountName,
-            'accountNumber' => $this->accountNumber,
+            'account_name' => $this->accountName,
+            'account_number' => $this->accountNumber,
             'currency' => $this->currency,
             'balance' => $this->balance,
         ];
