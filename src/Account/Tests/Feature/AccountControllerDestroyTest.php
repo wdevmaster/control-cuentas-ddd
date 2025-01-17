@@ -11,6 +11,12 @@ class AccountControllerDestroyTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutMiddleware();
+    }
+
     public function test_ItCanDeleteAnAccount()
     {
         $account = EloquentAccount::create([

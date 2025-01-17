@@ -11,6 +11,12 @@ class AccountControllerShowTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutMiddleware();
+    }
+
     public function test_ShowWithValidId()
     {
         $account = EloquentAccount::create([
