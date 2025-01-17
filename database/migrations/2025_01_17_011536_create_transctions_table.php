@@ -4,8 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use Bank\Transaction\Domain\ValueObjects\Type;
-
 return new class extends Migration
 {
     /**
@@ -16,7 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('account_id');
-            $table->enum('type', Type::availableTypes());
+            $table->enum('type', ['deposit', 'withdrawal']);
             $table->decimal('amount', 15, 2);
             $table->string('description')->nullable();
             $table->timestamp('created_at');

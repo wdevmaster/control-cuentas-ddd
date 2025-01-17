@@ -53,8 +53,8 @@ class CreateAccountTest extends TestCase
         $this->assertInstanceOf(AccountDTO::class, $result);
         $this->assertEquals([
             'id' => $id,
-            'accountName' => $data->getAccountName(),
-            'accountNumber' => $data->getAccountNumber(),
+            'account_name' => $data->getAccountName(),
+            'account_number' => $data->getAccountNumber(),
             'currency' => $data->getCurrency(),
             'balance' => $data->getBalance(),
         ], $result->toArray());

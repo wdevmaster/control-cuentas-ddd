@@ -32,8 +32,8 @@ class AccountControllerShowTest extends TestCase
                 ->assertJsonStructure([
                     'account' => [
                         'id',
-                        'accountNumber',
-                        'accountName',
+                        'account_number',
+                        'account_name',
                         'currency',
                         'balance',
                     ],

@@ -29,8 +29,8 @@ class AccountControllerStoreTest extends TestCase
         $response->assertStatus(201)
                 ->assertJsonStructure([
                     'id',
-                    'accountNumber',
-                    'accountName',
+                    'account_number',
+                    'account_name',
                     'currency',
                     'balance',
                 ]);
