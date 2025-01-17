@@ -8,6 +8,8 @@ class EloquentTransaction extends Model
 {
     protected $table = 'transactions';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'account_id',
         'type',

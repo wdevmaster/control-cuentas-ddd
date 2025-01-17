@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,9 @@ Route::prefix('accounts')->group(function () {
     Route::get('/{id}', [AccountController::class, 'show']);
     Route::put('/{id}', [AccountController::class, 'update']);
     Route::delete('/{id}', [AccountController::class, 'destroy']);
+});
+
+
+Route::prefix('transactions')->group(function () {
+    Route::post('/', [TransactionController::class, 'store']);
 });
