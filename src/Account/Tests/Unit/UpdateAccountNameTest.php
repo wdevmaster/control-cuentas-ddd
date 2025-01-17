@@ -7,7 +7,8 @@ use Bank\Account\Domain\Exceptions\AccountNotFoundException;
 use Bank\Account\Domain\Entities\Account;
 
 use Bank\Account\Application\Actions\UpdateAccountName;
-use Bank\Account\Application\DTOs\BankAccountDTO;
+use Bank\Account\Application\Actions\FindAccount;
+use Bank\Account\Application\DTOs\AccountDTO;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -24,7 +25,10 @@ class UpdateAccountNameTest extends TestCase
         $this->accountRepository = $this->createMock(AccountRepository::class);
 
         $this->updateAccountName = new UpdateAccountName(
-            $this->accountRepository
+            $this->accountRepository,
+            new FindAccount(
+                $this->accountRepository
+            )
         );
     }
 
@@ -51,7 +55,7 @@ class UpdateAccountNameTest extends TestCase
 
         $result = $this->updateAccountName->execute($id, $newName);
 
-        $this->assertInstanceOf(BankAccountDTO::class, $result);
+        $this->assertInstanceOf(AccountDTO::class, $result);
 
     }
 

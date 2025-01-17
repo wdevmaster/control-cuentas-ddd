@@ -7,6 +7,7 @@ use Bank\Account\Domain\Exceptions\AccountNotFoundException;
 use Bank\Account\Domain\Entities\Account;
 
 use Bank\Account\Application\Actions\DeleteAccount;
+use Bank\Account\Application\Actions\FindAccount;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -22,7 +23,10 @@ class DeleteAccountTest extends TestCase
 
         $this->accountRepository = $this->createMock(AccountRepository::class);
         $this->deleteAccount = new DeleteAccount(
-            $this->accountRepository
+            $this->accountRepository,
+            new FindAccount(
+                $this->accountRepository,
+            )
         );
     }
 

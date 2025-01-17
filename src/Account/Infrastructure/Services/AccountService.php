@@ -10,6 +10,8 @@ use Bank\Account\Application\Actions\UpdateAccountName;
 use Bank\Account\Application\Actions\DeleteAccount;
 use Bank\Account\Application\Actions\ListPaginatedAccounts;
 
+use Bank\Transaction\Application\Actions\GetAccountTransactions;
+
 use Bank\Account\Application\DTOs\CreateAccountDTO;
 
 use Illuminate\Http\Request;
@@ -17,13 +19,13 @@ use Illuminate\Support\Facades\Log;
 
 class AccountService
 {
-
     public function __construct(
         private CreateAccount $createAccount,
         private GetAccount $getAccount,
         private UpdateAccountName $updateAccountName,
         private DeleteAccount $deleteAccount,
-        private ListPaginatedAccounts $listPaginatedAccounts
+        private ListPaginatedAccounts $listPaginatedAccounts,
+        private GetAccountTransactions $getAccountTransactions
     ) {}
 
     /**
@@ -92,9 +94,11 @@ class AccountService
         try {
             $account = $this->getAccount->execute($id);
 
+            $transactions = $this->getAccountTransactions->execute($account->getId());
+
             return [
                 'account' => $account->toArray(),
-                'transactions' => []
+                'transactions' => array_map(fn($transaction) => $transaction->toArray(), $transactions)
             ];
         } catch (AccountNotFoundException $e) {
             Log::error('Account not found: ' . $e->getMessage(), ['exception' => $e]);

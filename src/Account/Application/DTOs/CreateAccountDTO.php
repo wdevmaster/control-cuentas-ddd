@@ -33,9 +33,9 @@ class CreateAccountDTO
     }
 
     /**
-     * Retrieves the currency in English.
+     * Retrieves the currency.
      *
-     * @return string The currency in English.
+     * @return string The currency.
      */
     public function getCurrency(): string
     {

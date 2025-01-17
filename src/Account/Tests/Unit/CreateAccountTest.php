@@ -7,7 +7,7 @@ use Bank\Account\Domain\Entities\Account;
 
 use Bank\Account\Application\Actions\CreateAccount;
 use Bank\Account\Application\DTOs\CreateAccountDTO;
-use Bank\Account\Application\DTOs\BankAccountDTO;
+use Bank\Account\Application\DTOs\AccountDTO;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -50,7 +50,7 @@ class CreateAccountTest extends TestCase
 
         $result = $this->createAccount->execute($data);
 
-        $this->assertInstanceOf(BankAccountDTO::class, $result);
+        $this->assertInstanceOf(AccountDTO::class, $result);
         $this->assertEquals([
             'id' => $id,
             'accountName' => $data->getAccountName(),

@@ -3,12 +3,12 @@
 namespace Bank\Account\Application\Actions;
 
 use Bank\Account\Domain\Repositories\AccountRepository;
-use Bank\Account\Domain\Exceptions\AccountNotFoundException;
 
 class DeleteAccount
 {
     public function __construct(
-        private AccountRepository $accountRepository
+        private AccountRepository $accountRepository,
+        private FindAccount $findAccount
     ){}
 
     /**
@@ -20,22 +20,8 @@ class DeleteAccount
      */
     public function execute(int $id): bool
     {
-        $this->existingAccount($id);
+        $this->findAccount->execute($id);
 
         return $this->accountRepository->delete($id);
-    }
-
-    /**
-     * Checks if the account exists.
-     *
-     * @param int $id ID of the account to check.
-     * @throws \Exception If the account does not exist.
-     */
-    private function existingAccount(int $id): void
-    {
-        $account = $this->accountRepository->findById($id);
-        if (!$account) {
-            throw new AccountNotFoundException();
-        }
     }
 }

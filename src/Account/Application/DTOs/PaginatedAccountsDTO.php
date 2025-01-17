@@ -69,7 +69,7 @@ class PaginatedAccountsDTO
     public function toArray(): array
     {
         return [
-            'data' => $this->getAccounts(),
+            'data' => array_map(fn($account) => $account->toArray(), $this->getAccounts()),
             'currentPage' => $this->getPage(),
             'perPage' => $this->getPageSize(),
             'total' => $this->getTotalItems(),

@@ -2,7 +2,7 @@
 
 namespace Bank\Account\Application\DTOs;
 
-class BankAccountDTO
+class AccountDTO
 {
     public function __construct(
         private int $id,
@@ -15,7 +15,7 @@ class BankAccountDTO
      * Converts an entity object to a DTO (Data Transfer Object).
      *
      * @param Account $account The entity object to be converted.
-     * @return BankAccountDTO The resulting DTO object.
+     * @return AccountDTO The resulting DTO object.
      */
     public static function fromEntity($account): self
     {
@@ -26,6 +26,16 @@ class BankAccountDTO
             $account->getCurrency()->getValue(),
             $account->getBalance()->getValue(),
         );
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getBalance()
+    {
+        return $this->balance;
     }
 
     /**

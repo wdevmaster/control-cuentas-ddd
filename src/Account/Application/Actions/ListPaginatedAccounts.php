@@ -5,7 +5,7 @@ namespace Bank\Account\Application\Actions;
 use Bank\Account\Domain\Repositories\AccountRepository;
 
 use Bank\Account\Application\DTOs\PaginatedAccountsDTO;
-use Bank\Account\Application\DTOs\BankAccountDTO;
+use Bank\Account\Application\DTOs\AccountDTO;
 
 class ListPaginatedAccounts
 {
@@ -62,7 +62,7 @@ class ListPaginatedAccounts
     private function mapAccounts($accounts): array
     {
         return array_map(function($account) {
-            return BankAccountDTO::fromEntity($account)->toArray();
+            return AccountDTO::fromEntity($account);
         }, $accounts);
     }
 }
