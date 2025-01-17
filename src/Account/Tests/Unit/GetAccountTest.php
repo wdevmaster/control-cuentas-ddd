@@ -7,7 +7,7 @@ use Bank\Account\Domain\Exceptions\AccountNotFoundException;
 use Bank\Account\Domain\Entities\Account;
 
 use Bank\Account\Application\Actions\GetAccount;
-use Bank\Account\Application\DTOs\BankAccountDTO;
+use Bank\Account\Application\DTOs\AccountDTO;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -39,7 +39,7 @@ class GetAccountTest extends TestCase
 
         $result = $this->getAccount->execute($id);
 
-        $this->assertInstanceOf(BankAccountDTO::class, $result);
+        $this->assertInstanceOf(AccountDTO::class, $result);
     }
 
     public function test_ThrowsExceptionIfAccountDoesNotExist()

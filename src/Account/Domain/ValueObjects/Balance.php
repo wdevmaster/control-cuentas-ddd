@@ -42,6 +42,28 @@ class Balance
     }
 
     /**
+     * Adds a specified amount to the current balance.
+     *
+     * @param float $amount The amount to add.
+     * @return self A new instance of Balance with the updated amount.
+     */
+    public function add(float $amount): self
+    {
+        return new self($this->value + $amount);
+    }
+
+    /**
+     * Subtracts a specified amount from the current balance.
+     *
+     * @param float $amount The amount to subtract.
+     * @return self A new instance of Balance with the updated amount.
+     */
+    public function subtract(float $amount): self
+    {
+        return new self($this->value - $amount);
+    }
+
+    /**
      * Get the balance value
      *
      * @return float The current balance value.

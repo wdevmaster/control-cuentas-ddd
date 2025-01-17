@@ -4,14 +4,14 @@ namespace Bank\Account\Application\Actions;
 
 use Bank\Account\Domain\Repositories\AccountRepository;
 use Bank\Account\Domain\Exceptions\AccountNotFoundException;
-use Bank\Account\Domain\Entities\Account;
 
-use Bank\Account\Application\DTOs\BankAccountDTO;
+use Bank\Account\Application\DTOs\AccountDTO;
 
 class UpdateAccountName
 {
     public function __construct(
-        private AccountRepository $accountRepository
+        private AccountRepository $accountRepository,
+        private FindAccount $findAccount
     ){}
 
     /**
@@ -19,37 +19,20 @@ class UpdateAccountName
      *
      * @param int $id The ID of the account to update.
      * @param string $name The new name for the account.
-     * @return BankAccountDTO The updated account data transfer object.
+     * @return AccountDTO The updated account data transfer object.
      * @throws AccountNotFoundException If the account does not exist.
      * @throws \InvalidArgumentException If the account name is invalid.
      */
-    public function execute(int $id, string $name): BankAccountDTO
+    public function execute(int $id, string $name): AccountDTO
     {
         $this->validateAccountName($name);
-        $account = $this->existingAccount($id);
+        $account = $this->findAccount->execute($id);
 
         $account->setAccountName($name);
 
         $account = $this->accountRepository->save($account);
 
-        return BankAccountDTO::fromEntity($account);
-    }
-
-    /**
-     * Retrieve the existing account by ID.
-     *
-     * @param int $id The ID of the account to retrieve.
-     * @return Account The account entity.
-     * @throws AccountNotFoundException If the account does not exist.
-     */
-    private function existingAccount(int $id): Account
-    {
-        $account = $this->accountRepository->findById($id);
-        if (!$account) {
-            throw new AccountNotFoundException();
-        }
-
-        return $account;
+        return AccountDTO::fromEntity($account);
     }
 
     /**

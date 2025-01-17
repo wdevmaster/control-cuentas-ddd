@@ -6,7 +6,7 @@ use Bank\Account\Domain\Repositories\AccountRepository;
 use Bank\Account\Application\Actions\ListPaginatedAccounts;
 
 use Bank\Account\Application\DTOs\PaginatedAccountsDTO;
-use Bank\Account\Application\DTOs\BankAccountDTO;
+use Bank\Account\Application\DTOs\AccountDTO;
 use Bank\Account\Domain\Entities\Account;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;

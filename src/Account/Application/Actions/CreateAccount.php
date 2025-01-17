@@ -6,7 +6,7 @@ use Bank\Account\Domain\Repositories\AccountRepository;
 use Bank\Account\Domain\Entities\Account;
 
 use Bank\Account\Application\DTOs\CreateAccountDTO;
-use Bank\Account\Application\DTOs\BankAccountDTO;
+use Bank\Account\Application\DTOs\AccountDTO;
 
 class CreateAccount
 {
@@ -18,10 +18,10 @@ class CreateAccount
      * Executes the creation of a new account.
      *
      * @param CreateAccountDTO $data
-     * @return BankAccountDTO
+     * @return AccountDTO
      * @throws \Exception if the account number is already in use or the balance is invalid.
      */
-    public function execute(CreateAccountDTO $data): BankAccountDTO
+    public function execute(CreateAccountDTO $data): AccountDTO
     {
         $this->existingAccount($data->getAccountNumber());
         $this->validateBalance($data->getBalance());
@@ -35,7 +35,7 @@ class CreateAccount
 
         $account = $this->accountRepository->save($account);
 
-        return BankAccountDTO::fromEntity($account);
+        return AccountDTO::fromEntity($account);
     }
 
     /**

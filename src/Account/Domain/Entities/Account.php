@@ -111,4 +111,38 @@ class Account
     {
         return $this->balance;
     }
+
+    /**
+     * Deposit an amount into the account.
+     *
+     * @param float $amount The amount to deposit.
+     * @return void
+     */
+    public function deposit(float $amount): void
+    {
+        if ($amount <= 0) {
+            throw new \InvalidArgumentException('Deposit amount must be positive');
+        }
+
+        $this->balance = $this->balance->add($amount);
+    }
+
+    /**
+     * Withdraw an amount from the account.
+     *
+     * @param float $amount The amount to withdraw.
+     * @return void
+     */
+    public function withdraw(float $amount): void
+    {
+        if ($amount <= 0) {
+            throw new \InvalidArgumentException('Withdrawal amount must be positive');
+        }
+
+        if ($this->balance->getValue() < $amount) {
+            throw new \DomainException('Insufficient balance');
+        }
+
+        $this->balance = $this->balance->subtract($amount);
+    }
 }
