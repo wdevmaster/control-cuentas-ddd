@@ -11,6 +11,12 @@ class AccountControllerIndexTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutMiddleware();
+    }
+
     public function setUpDataAccounts()
     {
         for ($i=1; $i <= 15; $i++) {

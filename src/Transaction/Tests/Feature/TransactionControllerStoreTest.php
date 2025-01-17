@@ -12,6 +12,12 @@ class TransactionControllerStoreTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutMiddleware();
+    }
+
     public function setUpDataAccounts()
     {
         $accountNumber = str_pad((string)rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
